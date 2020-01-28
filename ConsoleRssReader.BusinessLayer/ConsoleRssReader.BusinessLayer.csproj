@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <RootNamespace>ConsoleRssReader.BusinessLayer</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ConsoleRssReader.DataLayer\ConsoleRssReader.DataLayer.csproj" />
+    </ItemGroup>
+
+</Project>
