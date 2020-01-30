@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using ConsoleRssReader.DataLayer;
 
@@ -23,6 +22,7 @@ namespace ConsoleRssReader.BusinessLayer.Services
 
             foreach (var rss in listRss)
             {
+                //TODO:Exception Handler
                 _manager.Download(rss);
             }
             return "Success!";
@@ -30,21 +30,27 @@ namespace ConsoleRssReader.BusinessLayer.Services
 
         public List<string> List()
         {
+            List<string> rssItemsInfo = new List<string>();
             FileInfo[] files = _manager.ReadFromLocal();
+            RssHandlerService rssHandler = new RssHandlerService();
             foreach (var file in files)
             {
-                
+                //TODO: Exception Handler
+                rssItemsInfo.Add(rssHandler.Handling(file)); 
             }
-            return new List<string>();
+            return rssItemsInfo;
         }
 
         public string Remove()
         {
-            return "";
+            //TODO: Exception Handler
+            _manager.ClearLocal();
+            return "All downloaded tapes are deleted.";
         }
 
         public void Exit()
         {
+            //TODO: Write this func
         }
     }
 }
