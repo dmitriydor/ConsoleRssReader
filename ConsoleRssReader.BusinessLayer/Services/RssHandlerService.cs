@@ -13,10 +13,6 @@ namespace ConsoleRssReader.BusinessLayer.Services
             var xmlReader = XmlReader.Create(reader);
             var channel = SyndicationFeed.Load(xmlReader);
             string rssInfo = "";
-            if (channel == null)
-            {
-                throw new NullReferenceException();
-            }
             foreach (SyndicationItem rsi in channel.Items)
             {
                 rssInfo = rsi.Title.Text + "\t" + rsi.PublishDate.Date.ToShortDateString() + "\t";
