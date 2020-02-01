@@ -19,11 +19,6 @@ namespace ConsoleRssReader.DataLayer
         {
             string path = _configManager.Deserialization().LocalList;
             DirectoryInfo directory = new DirectoryInfo(path);
-            if (!directory.Exists)
-            {
-                throw new DirectoryNotFoundException("Directory not found: " + path);
-            }
-
             FileInfo[] files = directory.GetFiles();
             return files;
         }
@@ -37,10 +32,6 @@ namespace ConsoleRssReader.DataLayer
         {
             string path = _configManager.Deserialization().LocalList;
             DirectoryInfo directory = new DirectoryInfo(path);
-            if (!directory.Exists)
-            {
-                throw new DirectoryNotFoundException("Directory not found: " + path);
-            }
             FileInfo[] files = directory.GetFiles();
             foreach (var file in files)
             {

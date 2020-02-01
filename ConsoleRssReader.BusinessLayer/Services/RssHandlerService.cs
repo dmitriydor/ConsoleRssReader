@@ -5,7 +5,7 @@ using System.Xml;
 
 namespace ConsoleRssReader.BusinessLayer.Services
 {
-    public class RssHandlerService
+    public class RssHandlerService:IHandler
     {
         public string Handling(FileInfo file)
         {
