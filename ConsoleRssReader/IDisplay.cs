@@ -1,4 +1,4 @@
-﻿namespace ConsoleRssReader.PresenterLayer
+﻿namespace ConsoleRssReader
 {
     public interface IDisplay
     {

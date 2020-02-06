@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.ServiceModel.Syndication;
 using System.Xml;
@@ -7,12 +8,13 @@ namespace ConsoleRssReader.BusinessLayer.Services
 {
     public class RssHandlerService:IHandler
     {
-        public string Handling(FileInfo file)
+        public List<string> Handling(FileInfo file)
         {
             using StreamReader reader = new StreamReader(file.FullName);
             var xmlReader = XmlReader.Create(reader);
             var channel = SyndicationFeed.Load(xmlReader);
-            string rssInfo = "";
+            var rssInfo = "";
+            List<string> listRss = new List<string>();
             foreach (SyndicationItem rsi in channel.Items)
             {
                 rssInfo = rsi.Title.Text + "\t" + rsi.PublishDate.Date.ToShortDateString() + "\t";
@@ -20,9 +22,10 @@ namespace ConsoleRssReader.BusinessLayer.Services
                 {
                     rssInfo += link.Uri.ToString();
                 }
+                listRss.Add(rssInfo);
             }
             xmlReader.Close();
-            return rssInfo;
+            return listRss;
         }
     }
 }

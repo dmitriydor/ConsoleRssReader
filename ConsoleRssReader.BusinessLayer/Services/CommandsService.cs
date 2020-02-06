@@ -41,16 +41,15 @@ namespace ConsoleRssReader.BusinessLayer.Services
             return "Success!";
         }
 
-        public List<string> List()
+        public List<List<string>> List()
         {
-            List<string> rssItemsInfo = new List<string>();
-            string resultHandling;
+            List<List<string>> rssItemsInfo = new List<List<string>>();
             try
             {
                 FileInfo[] files = _manager.ReadFromLocal();
                 foreach (var file in files)
                 {
-                    resultHandling = _handler.Handling(file);
+                    var resultHandling = _handler.Handling(file);
                     rssItemsInfo.Add(resultHandling);
                 }
             }
@@ -72,16 +71,17 @@ namespace ConsoleRssReader.BusinessLayer.Services
             }
             return rssItemsInfo;
         }
-
-        public List<string> List(string arg)
-        {
-            //TODO: Write this func
-            return List();
-        }
+        
         public string Remove()
         {
-            //TODO: Exception Handler
-            _manager.ClearLocal();
+            try
+            {
+                _manager.ClearLocal();
+            }
+            catch (DirectoryNotFoundException e)
+            {
+                _logger.LogError(e,e.Message);
+            }
             return "All downloaded tapes are deleted.";
         }
 
@@ -96,10 +96,6 @@ namespace ConsoleRssReader.BusinessLayer.Services
                 _logger.LogError(e,e.Message);
             }
             return "Success!";
-        }
-        public void Exit()
-        {
-            //TODO: Write this func
         }
     }
 }
